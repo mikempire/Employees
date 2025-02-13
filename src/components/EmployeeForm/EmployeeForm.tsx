@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store.ts';
-import { setEmployees } from '../redux/employeeSlice';
+import { RootState } from '../../redux/store.ts';
+import { setEmployees } from '../../redux/employeeSlice.ts';
 import InputMask from 'react-input-mask';
-import ArchiveCheckbox from './UI/ArchiveCheckbox.tsx';
-import { Employee } from '../types/types.ts';
+import ArchiveCheckbox from '../UI/ArchiveCheckbox.tsx';
+import { Employee } from '../../types/types.ts';
 import './EmployeeForm.scss';
 
 const EmployeeForm = () => {

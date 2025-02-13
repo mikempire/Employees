@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilterRole, setFilterArchived } from '../redux/employeeSlice';
-import { RootState } from '../redux/store.ts';
+import { setFilterRole, setFilterArchived } from '../../redux/employeeSlice.ts';
+import { RootState } from '../../redux/store.ts';
 import { Link } from 'react-router-dom';
-import ArchiveCheckbox from './UI/ArchiveCheckbox.tsx';
+import ArchiveCheckbox from '../UI/ArchiveCheckbox.tsx';
 import './EmployeeList.scss';
 
 const roleTranslations: { [key: string]: string } = {
