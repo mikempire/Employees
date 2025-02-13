@@ -31,6 +31,7 @@ const EmployeeForm = () => {
 
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
   };
+
   const formatDateForSave = (date: string) => {
     const [year, month, day] = date.split('-');
     return `${day.padStart(2, '0')}.${month.padStart(2, '0')}.${year}`;

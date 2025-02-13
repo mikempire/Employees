@@ -70,7 +70,7 @@
     border: none;
     border-radius: $border-radius;
     cursor: pointer;
-    font-size: 16px;
+    font-size: inherit;
     transition: background-color 0.3s;
 
     &:hover {
@@ -109,16 +109,12 @@
   }
 
   .employee-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include center;
     padding: 10px;
   }
 
   .employee-empty {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include center;
   }
 
   @include responsive;

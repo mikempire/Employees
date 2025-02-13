@@ -47,10 +47,6 @@ const EmployeeList = () => {
     return 0;
   });
 
-  if (employees.length === 0) {
-    return <p>Нет сотрудников для отображения.</p>;
-  }
-
   return (
     <div className="employee-list">
       <h2>Список сотрудников</h2>
@@ -70,7 +66,6 @@ const EmployeeList = () => {
               </option>
             ))}
           </select>
-
           <ArchiveCheckbox checked={filter.isArchive} onChange={handleArchivedChange} />
         </div>
 
