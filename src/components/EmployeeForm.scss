@@ -1,0 +1,72 @@
+@use '../styles/base/mixins' as *;
+@use '../styles/base/variables' as *;
+
+.employee-form {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: $secondary-color;
+  border-radius: $border-radius;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+  input[type='date'] {
+    font-family: $font-family;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    input,
+    select {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: $border-radius;
+      border: 1px solid $border-color;
+      font-size: 14px;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-bottom: 10px;
+      position: relative;
+      left: 3px;
+      bottom: 5px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: $tertiary-color;
+      color: $secondary-color;
+      border: none;
+      border-radius: $border-radius;
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        background-color: ($primary-color, 10%);
+      }
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-left: 3px;
+      }
+    }
+  }
+
+  @include responsive;
+}
