@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store.ts';
 import { setEmployees } from '../../redux/employeeSlice.ts';
 import InputMask from 'react-input-mask';
-import ArchiveCheckbox from '../UI/ArchiveCheckbox.tsx';
+import ArchiveCheckbox from '../../components/UI/ArchiveCheckbox/ArchiveCheckbox.tsx';
 import { Employee } from '../../types/types.ts';
 import './EmployeeForm.scss';
 
@@ -21,6 +21,7 @@ const EmployeeForm = () => {
   const [isArchive, setIsArchive] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const employee = id ? employees.find((emp) => emp.id === Number(id)) : null;
+  const today = new Date().toISOString().split('T')[0]; // Текущая дата
 
   const formatDateForInput = (date: string) => {
     const [day, month, year] = date.split('.');
@@ -38,6 +39,10 @@ const EmployeeForm = () => {
   };
 
   useEffect(() => {
+    if (id && !employee) navigate('/404');
+  }, [id, employee, navigate]);
+
+  useEffect(() => {
     if (employee) {
       setName(employee.name);
       setPhone(employee.phone);
@@ -49,10 +54,15 @@ const EmployeeForm = () => {
 
   const handleSave = () => {
     const newErrors: { [key: string]: string } = {};
+    const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{4}/;
 
     if (!name) newErrors.name = 'Имя обязательно';
+    if (!phoneRegex.test(phone)) newErrors.phone = 'Некорректный формат телефона';
     if (!phone) newErrors.phone = 'Телефон обязателен';
     if (!birthday) newErrors.birthday = 'Дата рождения обязательна';
+    if (isNaN(new Date(birthday).getTime())) {
+      newErrors.birthday = 'Некорректная дата рождения';
+    }
     if (!role) newErrors.role = 'Должность обязательна';
 
     if (Object.keys(newErrors).length > 0) {
@@ -78,9 +88,11 @@ const EmployeeForm = () => {
     dispatch(setEmployees(updatedEmployees));
     navigate('/');
   };
-
+  console.log('ph', phone);
   return (
     <div className="employee-form">
+      <button onClick={() => navigate(-1)}>Назад</button>
+
       <h2>{id ? 'Редактировать сотрудника' : 'Добавить нового сотрудника'}</h2>
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="form-group">
@@ -97,7 +109,7 @@ const EmployeeForm = () => {
         <div className="form-group">
           <label>Телефон</label>
           <InputMask
-            mask="+7 (999) 999-99-99"
+            mask="+7 (999) 999-9999"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           >
@@ -110,7 +122,12 @@ const EmployeeForm = () => {
 
         <div className="form-group">
           <label>Дата рождения</label>
-          <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} />
+          <input
+            type="date"
+            max={today}
+            value={birthday}
+            onChange={(e) => setBirthday(e.target.value)}
+          />
           {errors.birthday && <span className="error">{errors.birthday}</span>}
         </div>
 

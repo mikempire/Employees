@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFilterRole, setFilterArchived } from '../../redux/employeeSlice.ts';
 import { RootState } from '../../redux/store.ts';
 import { Link } from 'react-router-dom';
-import ArchiveCheckbox from '../UI/ArchiveCheckbox.tsx';
+import ArchiveCheckbox from '../../components/UI/ArchiveCheckbox/ArchiveCheckbox.tsx';
 import './EmployeeList.scss';
 
 const roleTranslations: { [key: string]: string } = {
@@ -28,6 +28,7 @@ const EmployeeList = () => {
   };
 
   const handleSortChange = (field: 'name' | 'birthday') => {
+    // вынести в Redux
     if (field === sortOrder) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
     } else {
@@ -75,14 +76,14 @@ const EmployeeList = () => {
             className={sortOrder === 'name' ? 'active' : ''}
           >
             Сортировать по имени
-            {sortOrder === 'name' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
+            {sortOrder === 'name' && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
           </button>
           <button
             onClick={() => handleSortChange('birthday')}
             className={sortOrder === 'birthday' ? 'active' : ''}
           >
             Сортировать по дате рождения
-            {sortOrder === 'birthday' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
+            {sortOrder === 'birthday' && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
           </button>
         </div>
       </div>
