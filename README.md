@@ -2,7 +2,7 @@
 
 ## Для запуска в dev: npm run dev
 Порт для открытия
-http://localhost:5174/
+http://localhost:5173/
 
 
 
